@@ -1,0 +1,15 @@
+score_path: /n/netscratch/sham_lab/Everyone/dclm/color_filter/scores/dclm-filtered_core-train-tasks_1-to-5/combined/chunk_scores.jsonl
+out_path: /n/netscratch/sham_lab/Everyone/dclm/color_filter/data/selected/dclm-filtered_core-train-tasks_1-to-5/T-0_25
+
+# ******************************************************************************
+# Use `n` to specify the number of tokens to select. Toggle selection strategy
+# and relevant hyperparameters (temperature, repetitions) with `mode`
+# Chunk / document level selection is mutually exclusive with other modes. Set
+# Documents to True or False to toggle.
+# ******************************************************************************
+
+n: 8_800_000_000
+mode: ['sample', '0.25'] # ('sample', T) or ('repeat', r)
+
+k: null
+documents: null
