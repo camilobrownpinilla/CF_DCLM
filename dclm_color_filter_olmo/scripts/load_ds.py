@@ -247,8 +247,8 @@ class DatasetProcessor:
             print(f"Saved processed data to {output_file}")
 
 if __name__ == "__main__":
-    yaml_path = "mmlu_train.yaml"
-    output_dir = "mmlu-aux-trainset-padded"
+    yaml_path = "/n/netscratch/sham_lab/Everyone/cbrownpinilla/CF_DCLM/dclm_color_filter_olmo/configs/dclm/format_core-tasks-v3.yaml"
+    output_dir = "/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/raw/old_core-task-trainsets-v3"
 
     processor = DatasetProcessor(yaml_path, output_dir)
     processor.process_datasets()
