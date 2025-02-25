@@ -88,6 +88,10 @@ class DSDataLoader:
                 # Handle SQuAD format:
                 elif self.task_label == 'squad':
                     answer = entry.get(answer_col)['text']
+                    if answer: answer = answer[0] # Answers formatted like ['answer']; some are missing
+                    else:
+                        with open('./bad_squad_examples.txt', 'a') as f:
+                            f.write(f"Iter: {c} \tQuestion: {question}, \tAnswer{answer}, \tAnswer Col: {entry.get(answer_col)}\n")
                     qa_pairs = [(question, answer)]
 
                 else:
