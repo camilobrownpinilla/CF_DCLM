@@ -2,7 +2,7 @@
 # wandb:
 #   group: pretrain
 
-sweep:
+
   - max_duration: 24000
     scheduler: 
       t_warmup: 1000

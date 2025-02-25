@@ -15,7 +15,6 @@ device_train_microbatch_size: 128 # For H100 w/color, need smaller for RHO metho
 #   group: debug
 
 model:
-  # 151m non-embedding params
   d_model: 1024
   mlp_hidden_size: 4096
   n_heads: 16
