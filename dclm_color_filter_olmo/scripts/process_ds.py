@@ -53,6 +53,8 @@ class DSDataLoader:
                     answer = choices[int(answer)]
                 except Exception as e:
                     print(f'Error: {e}, {self.task_label} cannot be handled. Try modifying the script.') 
+            
+            return answer
 
 
     def _format_qa_pair(self, context, question, answer, question_prelimiter="", continuation_delimiter=" "):
@@ -70,24 +72,35 @@ class DSDataLoader:
         choice_key = self.task_config.get("choice_index", "")
         answer_col = self.task_config.get("answer_col", "answer")
 
-        for c, entry in tqdm(enumerate(data), desc='Formatting', colour='yellow', unit='example', total=len(data)):
-            context = entry.get(context_col, "")
-            question = entry.get(question_col, "")
-            choices = entry.get(choice_col)
-            
-            # Handle CoQA multiple QA pairs
-            if isinstance(question, list):
-                answers = entry.get(answer_col, {"input_text": []})
-                qa_pairs = zip(question, answers["input_text"])
-            else:
-                answer = entry.get(answer_col)
-                if choices:
-                    answer = self._get_answer_from_choices(choices, answer, choice_key)
-                qa_pairs = [(question, answer)]
+        # Open tar file once at the beginning
+        tar_path = os.path.join(self.out_path, f'{self.task_label}.tar')
+        with tarfile.open(tar_path, 'w') as tar:
+            for c, entry in tqdm(enumerate(data), desc='Formatting', colour='yellow', unit='example', total=len(data)):
+                context = entry.get(context_col, "")
+                question = entry.get(question_col, "")
+                choices = entry.get(choice_col)
+                
+                # Handle CoQA multiple QA pairs
+                if isinstance(question, list):
+                    answers = entry.get(answer_col, {"input_text": []})
+                    qa_pairs = zip(question, answers["input_text"])
 
-            # Process all QA pairs for the current entry and save to tar
-            tar_path = os.path.join(self.out_path, f'{self.task_label}.tar')
-            with tarfile.open(tar_path, 'w') as tar:
+                # Handle SQuAD format:
+                elif self.task_label == 'squad':
+                    answer = entry.get(answer_col)['text']
+                    if answer: answer = answer[0] # Answers formatted like ['answer']; some are missing
+                    else:
+                        with open('./bad_squad_examples.txt', 'a') as f:
+                            f.write(f"Iter: {c} \tQuestion: {question}, \tAnswer{answer}, \tAnswer Col: {entry.get(answer_col)}\n")
+                    qa_pairs = [(question, answer)]
+
+                else:
+                    answer = entry.get(answer_col)
+                    if choices:
+                        answer = self._get_answer_from_choices(choices, answer, choice_key)
+                    qa_pairs = [(question, answer)]
+
+                # Process all QA pairs for the current entry
                 for q, a in qa_pairs:
                     formatted_entry = self._format_qa_pair(
                         context, q, a, question_prelimiter, continuation_delimiter
