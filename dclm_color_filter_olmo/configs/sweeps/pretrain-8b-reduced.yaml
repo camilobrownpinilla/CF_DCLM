@@ -1,0 +1,20 @@
+# 8 jobs
+wandb:
+  project: DCLM
+  entity: hamshoe
+  name: pretrain-8b-reduced
+
+seed: 1
+
+device_train_microbatch_size: 8
+model:
+  d_model: 768
+  max_sequence_length: 2048
+  mlp_hidden_size: 3072
+  n_heads: 8
+  n_layers: 24
+  
+time_limit: 2100000 # 600 hrs
+max_duration: 16000 # 24B tokens (8x 24k steps)
+scheduler: 
+  t_warmup: 2000

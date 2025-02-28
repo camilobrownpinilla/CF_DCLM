@@ -2,7 +2,7 @@ download_path = "/n/holyscratch01/sham_lab/dclm/color_filter"
 
 DATA_DICT = {
     # "c4": f"{download_path}/full_data/c4",
-    "prior_data": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/memmap/fineweb-edu-10B",
+    "prior_data": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/memmap/dclm-filtered_1-to-5",
     "conditional_data": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/memmap/core-task-trainsets-v3",
     "books-val": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/validation/",
 }
