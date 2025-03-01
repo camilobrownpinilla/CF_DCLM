@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --job-name=1b-fullRun
-#SBATCH --output=logs/%x_%A_%a.log
+#SBATCH --job-name=8b_8b-reduced
+#SBATCH --output=/n/netscratch/sham_lab/Everyone/cbrownpinilla/CF_DCLM/dclm_color_filter_olmo/logs/dclm_runs/%x_%A_%a.log
 #SBATCH -p kempner_h100
 #SBATCH --account=kempner_sham_lab
 #SBATCH --nodes=1              
@@ -21,8 +21,11 @@ conda deactivate
 conda activate color-filter
 cd DCLM/
 
+# Set to path to output log
+export SLURM_OUTPUT_FILE="/n/netscratch/sham_lab/Everyone/cbrownpinilla/CF_DCLM/dclm_color_filter_olmo/logs/dclm_runs/${SLURM_JOB_NAME}_${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}.log"
+
 python ../dclm.py \
-    --selected_dir /n/netscratch/sham_lab/Everyone/dclm/color_filter/data/selected/dclm-filtered_core-train-tasks_3-to-5/top_1b_new \
+    --selected_dir /n/netscratch/sham_lab/Everyone/dclm/color_filter/data/selected/core-train-tasks/8b-reduced/8b \
     --dclm_scale 411m_1x\
     --evaluation heavy\
     --multiple_data_passes

@@ -14,6 +14,7 @@ sys.path.append(str(Path(__file__).resolve().parent))  # Add the current directo
 SLURM_ID = os.environ.get('SLURM_JOB_ID')
 SLURM_TASK_ID = os.environ.get('SLURM_ARRAY_TASK_ID')
 SLURM_JOB_NAME = os.environ.get('SLURM_JOB_NAME')
+SLURM_OUTPUT_FILE = os.environ.get('SLURM_OUTPUT_FILE')
 GPUS = len(os.environ.get('CUDA_VISIBLE_DEVICES').split(','))
 
 import logging
@@ -22,7 +23,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(f'../logs/{SLURM_JOB_NAME}_{SLURM_ID}_{SLURM_TASK_ID}.log')  
+        logging.FileHandler(f'{SLURM_OUTPUT_FILE}')  
     ]
 )
 logger = logging.getLogger(__name__)
