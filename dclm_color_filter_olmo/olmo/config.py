@@ -551,7 +551,7 @@ class DataConfig(BaseConfig):
     datasets: Optional[Dict[str, Any]] = None
     label_mask_paths: Optional[List[str]] = None
     pad_direction: PaddingDirection = PaddingDirection.right
-    generate_attention_mask: bool = False
+    generate_attention_mask: bool = True
     num_workers: int = 0
     drop_last: bool = False
     pin_memory: bool = False

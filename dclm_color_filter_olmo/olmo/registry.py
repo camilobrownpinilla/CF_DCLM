@@ -9,7 +9,13 @@ DATA_DICT = {
 
 # Pretrained model weights
 MODEL_DICT = {
-    "prior": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/models/prior_fineweb-edu10B/3457015_1/latest-unsharded",
+    "prior_8b_full": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/models/prior_8b/4725806_1/latest-unsharded",
+    "prior_8b_small": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/models/prior_8b/4725783_1/latest-unsharded",
+    "prior_8b_reduced": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/models/prior_8b/4769090_1/latest-unsharded",
+    "conditional_hellaswag_8b_full": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/models/conditional_8b_hellaswag/8b/5146029_1/latest-unsharded",
+    "conditional_hellaswag_8b_small": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/models/conditional_8b_hellaswag/8b-small/5145957_1/latest-unsharded",
+    "conditional_hellaswag_8b_reduced": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/models/conditional_8b_hellaswag/8b-reduced/5145544_1/latest-unsharded",
+
     "conditional_books": f"{download_path}/models/conditional_books",
     "conditional_all": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/models/conditional_fineweb-edu10B/3525191_1/latest-unsharded",
     "random_1b": f"{download_path}/models/random_1b",

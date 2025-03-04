@@ -62,6 +62,8 @@ def build_memmap_dataset(
             metadata.extend([{"label": label}] * len(label_paths))
     else:
         raise OLMoConfigurationError("One of DataConfig.paths or DataConfig.datasets is required")
+    print("DEBUG: Pad Token ID (by default is EOS):", train_config.model.pad_token_id)
+
     return MemMapDataset(
         *paths,
         chunk_size=train_config.model.max_sequence_length,

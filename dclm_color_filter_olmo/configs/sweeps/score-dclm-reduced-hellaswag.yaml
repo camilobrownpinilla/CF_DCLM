@@ -1,0 +1,28 @@
+wandb:
+  project: DCLM
+  entity: hamshoe
+  name: score-dclm-reduced-hellaswag
+
+just_score_model: true
+save_folder: /n/netscratch/sham_lab/Everyone/dclm/color_filter/scores/hellaswag-train-tasks/8b_reduced
+max_duration: 75000 # ~130k tokens per step
+global_train_batch_size: 256
+device_train_microbatch_size: 256 
+restore_dataloader: false # restart from step 0
+reset_optimizer_state: true
+reset_trainer_state: true
+seed: 1
+model:
+  d_model: 768
+  max_sequence_length: 2048
+  mlp_hidden_size: 3072
+  n_heads: 8
+  n_layers: 12
+sweep:
+  - load_path:
+      - prior_8b_reduced
+      - conditional_hellaswag_8b_reduced
+    load_checkpoint_type: unsharded
+    data_start_step: # whole dataset in parallel
+      - 0
+      - 75000

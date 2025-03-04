@@ -1,16 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=pretrain-8b-matchparams
+#SBATCH --job-name=score-8b
 #SBATCH --output=../logs/%x-%A_%a.log
 #SBATCH -p kempner_h100
 #SBATCH --account=kempner_sham_lab
 #SBATCH --nodes=1              
 #SBATCH --ntasks-per-node=1
-#SBATCH --gpus-per-node=4   
+#SBATCH --gpus-per-node=1 
 #SBATCH --cpus-per-task=24
 #SBATCH --time=36:00:00
 #SBATCH --mem=250GB		
 #SBATCH --constraint=h100
-#SBATCH --array=1-1
+#SBATCH --array=1-4
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=bham@college.harvard.edu
 

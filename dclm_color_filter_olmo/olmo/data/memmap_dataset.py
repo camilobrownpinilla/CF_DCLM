@@ -49,7 +49,7 @@ class MemMapDataset(Dataset[Dict[str, Any]]):
         memmap_dtype=np.uint16,
         metadata: Optional[Union[List[Dict[str, Any]], Dict[str, Any]]] = None,
         include_instance_metadata: bool = True,
-        generate_attention_mask: bool = False,
+        generate_attention_mask: bool = True,
         pad_token_id: Optional[int] = None,
         label_mask_paths: Optional[List[PathOrStr]] = None,
     ):
