@@ -2,3 +2,5 @@ dclm_color_filter_olmo/logs/
 dclm_color_filter_olmo/notebooks/
 distributions/
 examples/
+
+**/__pycache__/
