@@ -56,7 +56,7 @@ class MemMapDataset(Dataset[Dict[str, Any]]):
         if not paths:
             raise ValueError("At least one path is required")
 
-        if generate_attention_mask and not pad_token_id:
+        if generate_attention_mask and (pad_token_id != 0 and not pad_token_id):
             raise ValueError("'pad_token_id' is required for 'generate_attention_mask'")
 
         if label_mask_paths and len(label_mask_paths) != len(paths):
