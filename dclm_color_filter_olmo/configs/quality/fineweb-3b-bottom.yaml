@@ -1,0 +1,15 @@
+# 8 jobs
+wandb:
+  project: DCLM
+  entity: hamshoe
+  name: fineweb-3b-bottom600M
+
+seed: 1
+
+device_train_microbatch_size: 8
+  
+time_limit: 2100000 # 600 hrs
+max_duration: 5ep # 3B tokens
+
+data:
+  paths: finewebedu-3B-bottom
