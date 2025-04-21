@@ -101,17 +101,17 @@ speed_monitor:
 
 console_log_interval: 10
 
-eval_interval: 2000
+eval_interval: 500
 eval_on_load: false
 eval_subset_num_batches: 100
-device_eval_batch_size: 64
+device_eval_batch_size: 8
 evaluators:
   ##########################
   # Perplexity evaluations #
   ##########################
-  - label: books
+  - label: finewebedu-val
     data:
-      paths: books-val
+      paths: finewebedu-val
       # datasets:
       #   books_val: books-val
       drop_last: true

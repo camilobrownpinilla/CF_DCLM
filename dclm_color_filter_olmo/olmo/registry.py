@@ -5,6 +5,11 @@ DATA_DICT = {
     "prior_data": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/memmap/dclm-filtered_1-to-5",
     "conditional_data": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/memmap/core-task-trainsets-v3",
     "books-val": f"/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/validation/",
+    "finewebedu-val": "/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/memmap/finewebedu-val",
+    "finewebedu-3B": "/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/memmap/finewebedu-3B",
+    "finewebedu-3B-top": "/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/memmap/finewebedu-3B-top600M",
+    "finewebedu-3B-bottom": "/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/memmap/finewebedu-3B-bottom600M",
+    "finewebedu-3B-random": "/n/netscratch/sham_lab/Everyone/dclm/color_filter/data/memmap/finewebedu-3B-random600M",
 }
 
 # Pretrained model weights
