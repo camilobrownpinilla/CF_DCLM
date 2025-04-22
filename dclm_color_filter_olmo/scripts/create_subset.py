@@ -40,7 +40,7 @@ def open_csv(p: Path):
 
 def n_tokens(row: Row) -> int:
     # prefer tokens_from_csv if present, else span_length
-    return int(row["tokens_from_csv"] or row["span_length"])
+    return int(row["span_length"])
 
 # ------------------------------------------------------------- select helpers
 def select_top_rows(csv_path: Path, cap: int) -> List[Row]:
@@ -97,7 +97,7 @@ def build_dataset(rows: List[Row], out_dir: Path, dtype=np.uint16):
 
     with gzip.open(out_meta, "wt", newline="") as fout:
         wr = csv.writer(fout)
-        wr.writerow(["start", "end", "id", "path", "token_count"])
+        # wr.writerow(["start", "end", "id", "path", "token_count"])
         for r in tqdm(rows, desc="Copy", unit="doc"):
             s, e = int(r["start"]), int(r["end"])
             tcnt = e - s

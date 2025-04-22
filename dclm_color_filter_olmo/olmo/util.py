@@ -377,6 +377,7 @@ def get_bytes_range(source: PathOrStr, bytes_start: int, num_bytes: int) -> byte
         else:
             raise NotImplementedError(f"get bytes range not implemented for '{parsed.scheme}' files")
     else:
+        print(f"DEBUG: opening {source} as rb")
         with open(source, "rb") as f:
             f.seek(bytes_start)
             return f.read(num_bytes)

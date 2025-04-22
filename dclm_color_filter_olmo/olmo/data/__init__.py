@@ -50,6 +50,8 @@ def build_memmap_dataset(
             paths = list(Path(DATA_DICT.get(paths, paths)).glob("*.npy"))
         for path in paths:
             metadata.append({"path": str(path)})
+        print("DEBUG: Paths used for pretrain data:", paths)
+        print("DEBUG: Metadata used for pretrain data:", metadata)
     elif data_config.datasets:
         paths = []
         for label in sorted(data_config.datasets.keys()):

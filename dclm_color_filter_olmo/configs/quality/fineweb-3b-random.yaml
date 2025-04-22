@@ -2,7 +2,7 @@
 wandb:
   project: DCLM
   entity: hamshoe
-  name: fineweb-3b-bottom600M
+  name: fineweb-3b-random600M
 
 seed: 1
 

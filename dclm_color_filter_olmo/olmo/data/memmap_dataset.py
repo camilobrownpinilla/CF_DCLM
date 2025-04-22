@@ -78,6 +78,7 @@ class MemMapDataset(Dataset[Dict[str, Any]]):
         self._include_instance_metadata = include_instance_metadata
         self._generate_attention_mask = generate_attention_mask
         self._pad_token_id = pad_token_id
+        print("DEBUG: metadata in memmap_dataset.py:", self._metadata)
 
     @property
     def chunk_size(self) -> int:
@@ -149,11 +150,14 @@ class MemMapDataset(Dataset[Dict[str, Any]]):
         item_size = dtype(0).itemsize
         bytes_start = index * item_size * self._chunk_size
         num_bytes = item_size * self._chunk_size
+        print(f"DEBUG: bytes read from {path}: starts at {bytes_start} for {num_bytes} bytes, chunk_size={self._chunk_size} and item_size={item_size}")
         buffer = get_bytes_range(path, bytes_start, num_bytes)
         array = np.frombuffer(buffer, dtype=dtype)
         if dtype == np.bool_:
+            print("DEBUG: read from read chunk from memmap:", torch.tensor(array))
             return torch.tensor(array)
         else:
+            print("DEBUG: read from read chunk from memmap:", torch.tensor(array.astype(np.int_), dtype=torch.long))
             return torch.tensor(array.astype(np.int_), dtype=torch.long)
 
     def _get_file_length(self, path, dtype=None) -> Tuple[PathOrStr, int]:
@@ -183,8 +187,12 @@ class MemMapDataset(Dataset[Dict[str, Any]]):
             raise IndexError(f"{index} is out of bounds for dataset of size {len(self)}")
 
         # Read the data from file.
+        print("DEBUG: memmap_index (should be 0 always):", memmap_index)
+        print("DEBUG: memmap_local_index:", memmap_local_index)
+        print("DEBUG: path used:", self._memmap_paths[memmap_index])
         input_ids = self._read_chunk_from_memmap(self._memmap_paths[memmap_index], memmap_local_index)
         out: Dict[str, Any] = {"input_ids": input_ids}
+        print("DEBUG: first bit of out data in memmap_dataset:", out["input_ids"][:50])
 
         if self._label_mask_paths is not None:
             label_mask = self._read_chunk_from_memmap(
@@ -193,10 +201,12 @@ class MemMapDataset(Dataset[Dict[str, Any]]):
             out["label_mask"] = label_mask
 
         if self._include_instance_metadata:
+            print("DEBUG: include instance metadata = true in memmap_dataset")
             idx_in_memmap = memmap_local_index * self._chunk_size
             metadata = self._metadata[memmap_index]
             metadata["memmap_idx_range"] = [idx_in_memmap, idx_in_memmap + self._chunk_size]
             out["metadata"] = deepcopy(metadata)
+            print("out['metadata']:", out["metadata"])
 
         if self._generate_attention_mask:
             assert self._pad_token_id is not None
