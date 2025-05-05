@@ -1,3 +1,6 @@
 [submodule "DCLM"]
 	path = DCLM
 	url = https://github.com/mlfoundations/dclm.git
+[submodule "OLMo-Eval"]
+	path = OLMo-Eval
+	url = https://github.com/allenai/OLMo-Eval.git
